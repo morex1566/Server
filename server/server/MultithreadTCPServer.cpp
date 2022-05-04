@@ -9,7 +9,7 @@
 #define BUFSIZE    512
 
 // 소켓 함수 오류 출력 후 종료
-void err_quit(const char *msg)
+void err_quit(const char* msg)
 {
     LPVOID lpMsgBuf;
     FormatMessage(
@@ -23,7 +23,7 @@ void err_quit(const char *msg)
 }
 
 // 소켓 함수 오류 출력
-void err_display(const char *msg)
+void err_display(const char* msg)
 {
     LPVOID lpMsgBuf;
     FormatMessage(
@@ -31,7 +31,7 @@ void err_display(const char *msg)
         NULL, WSAGetLastError(),
         MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
         (LPTSTR)&lpMsgBuf, 0, NULL);
-    printf("[%s] %s", msg, (char *)lpMsgBuf);
+    printf("[%s] %s", msg, (char*)lpMsgBuf);
     LocalFree(lpMsgBuf);
 }
 
@@ -46,7 +46,7 @@ DWORD WINAPI ProcessClient(LPVOID arg)
 
     // 클라이언트 정보 얻기
     addrlen = sizeof(clientaddr);
-    getpeername(client_sock, (SOCKADDR *)&clientaddr, &addrlen);
+    getpeername(client_sock, (SOCKADDR*)&clientaddr, &addrlen);
 
     while (1) {
         // 데이터 받기
@@ -79,7 +79,7 @@ DWORD WINAPI ProcessClient(LPVOID arg)
     return 0;
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
     int retval;
 
@@ -98,7 +98,7 @@ int main(int argc, char *argv[])
     serveraddr.sin_family = AF_INET;
     serveraddr.sin_addr.s_addr = htonl(INADDR_ANY);
     serveraddr.sin_port = htons(SERVERPORT);
-    retval = bind(listen_sock, (SOCKADDR *)&serveraddr, sizeof(serveraddr));
+    retval = bind(listen_sock, (SOCKADDR*)&serveraddr, sizeof(serveraddr));
     if (retval == SOCKET_ERROR) err_quit("bind()");
 
     // listen()
@@ -114,7 +114,7 @@ int main(int argc, char *argv[])
     while (1) {
         // accept()
         addrlen = sizeof(clientaddr);
-        client_sock = accept(listen_sock, (SOCKADDR *)&clientaddr, &addrlen);
+        client_sock = accept(listen_sock, (SOCKADDR*)&clientaddr, &addrlen);
         if (client_sock == INVALID_SOCKET) {
             err_display("accept()");
             break;

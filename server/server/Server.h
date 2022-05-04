@@ -1,24 +1,31 @@
 #pragma once
-#include <Windows.h>
-#include <vector>
-#include <thread>
+#define _WINSOCK_DEPRECATED_NO_WARNINGS // 최신 VC++ 컴파일 시 경고 방지
+#pragma comment(lib, "ws2_32")
+
+#include <winsock2.h>
+#include <stdlib.h>
+#include <iostream>
+#include <tchar.h>
 
 class Server
 {
 private:
-	WSADATA windowsock;
-	SOCKET listenSock;
-	SOCKADDR_IN serveraddr;
-	std::vector<std::thread> threads;
+	static int ServerPort;
+	static int BufSize;
+	WSADATA wsa;
+	SOCKET sock;
+	SOCKADDR_IN address;
 
 public:
-	void socket();
-	void bind();
-	void listen();
-	void accept();
-	void allocThread();
+	Server();
+	~Server();
 
-private:
-
+	void setSocket();
+	void bindSocket();
+	void listenSocket();
+	
+	void update();
+	void acceptClient();
+	void closeSocket();
 };
 

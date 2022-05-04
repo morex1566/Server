@@ -1,18 +1,38 @@
 #include "Server.h"
-#include <winsock2.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <tchar.h>
 
-void Server::socket()
+int Server::ServerPort = 9000;
+int Server::BufSize = 512;
+
+Server::Server(){}
+
+Server::~Server(){}
+
+void Server::setSocket()
 {
-	
-	listenSock = socket(AF_INET, SOCK_STREAM, 0);
-	if (listen_sock == INVALID_SOCKET) err_quit("socket()");
-	return;
+
 }
 
-void Server::bind()
+void Server::bindSocket()
+{
+
+}
+
+void Server::listenSocket()
+{
+
+}
+
+void Server::update()
+{
+
+}
+
+void Server::acceptClient()
+{
+
+}
+
+void Server::closeSocket()
 {
 
 }
